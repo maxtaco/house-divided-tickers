@@ -16,18 +16,36 @@ class QuoteGetter:
     def fetch (self):
         date2 = self._date
         date1 = self._date + datetime.timedelta(20)
-        prfx = "http://ichart.finance.yahoo.com/table.csv?"
-        fmt = "{prfx}s={ticker}&a={m1}&b={d1}&c={y1}&d={m2}&e={d2}&f={y2}&g=d&ignore=.csv"
-        url = fmt.format( prfx = prfx,
-                          ticker = self._ticker,
-                          m1 = date1.month - 1,
-                          d1 = date1.day,
-                          y1 = date1.year,
-                          m2 = date2.month - 1,
-                          d2 = date2.day,
-                          y2 = date2.year )
+        csv_prfx = "http://ichart.finance.yahoo.com/table.csv"
+
+        prfx = "http://finance.yahoo.com/q/hp"
+
+        fmt = "{prfx}s={ticker}&a={m1}&b={d1}&c={y1}&" + \
+            "d={m2}&e={d2}&f={y2}&g=d&ignore=.csv"
+
+        params = [  ("s", self._ticker),
+                    ("a", date1.month - 1),
+                    ("b", date1.day),
+                    ("c", date1.year),
+                    ("d", date2.month - 1),
+                    ("e", date2.day),
+                    ("f", date2.year),
+                    ("g", "d") ]
+
+        qs = "&".join([ "{0}={1}".format(*p) for p in params ])
+
+        ref_url = prfx + "?" + qs
+        url = csv_prfx + "?" + qs
+        
+        headers = { "User-Agent" : "Mozilla/5.0 (X11; U; Linux i686) " + \
+                        "Gecko/20071127 Firefox/2.0.0.11",
+                    "Referrer" : ref_url 
+            }
+
         print("XXX: {0}".format(url))
-        self._res = urllib.request.urlopen(url)
+        req = urllib.request.Request(url, None, headers)
+
+        self._res = urllib.request.urlopen(req)
         self._body = self._res.read()
         return self._body
 
