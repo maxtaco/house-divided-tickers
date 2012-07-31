@@ -44,6 +44,7 @@ class QuoteGetter:
 
         print("XXX: {0}".format(url))
         req = urllib.request.Request(url, None, headers)
+        print("Req: {0}".format(str(req)))
 
         self._res = urllib.request.urlopen(req)
         self._body = self._res.read()
