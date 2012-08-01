@@ -5,9 +5,10 @@ Tickers for a performance of "House/Divided"
 
 * See the `out/` directory for the output.
 * Run `all.sh` to generate output
-* `all.sh` calls `pull_date.py` for each date in question.  That file grabs the historical quotes
-from Yahoo for each index in the current S&P 500.
-* The list of input tickers is `sp500_tickers.txt`
+    * `all.sh` calls `pull_date.py` for each date in question.  
+       That file grabs the historical quotes from Yahoo for 
+       each index in the current S&P 500.
+    * The list of input tickers is `sp500_tickers.txt`
 * The columns of the output are, in order:
    1. Ticker
    1. Open Price
@@ -18,4 +19,11 @@ from Yahoo for each index in the current S&P 500.
    1. Adjusted Close (not sure what this means)
    1. Difference in price on the day (close - open)
    1. Percentage difference in price ( (close - open)/open )
-* Run it yourself on your Mac, but it require Python v3
+* Run it yourself on your Mac; make sure that Python v3 is installed and
+is in your path.
+* As I noted in email, `LEH` or Lehman Brothers is *not* available,
+since Yahoo removes quote data (or makes it inaccessible) one a stock
+is delisted.
+* To "fudge" the LEH data, see this graph: http://tinyurl.com/cmalgze
+
+
