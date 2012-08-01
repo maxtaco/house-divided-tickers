@@ -10,11 +10,14 @@ class MyError (Exception):
 def parse_date (s):
     v = [ int (i) for i in s.split("-") ]
     return datetime.datetime(v[0], v[1], v[2])
-def date_to_str (d):
-    return "-".join([ str(s) for s in [ d.year, d.month, d.day ] ])
+def date_to_str (d, sep = "_" ):
+    return sep.join([ format(s, "02d") for s in [ d.year, d.month, d.day ] ])
 
 def warn (s):
     sys.stderr.write(s + "\n")
+
+def date_to_filename (d):
+    return "out/" + date_to_str(d) + ".txt"
 
 class Quote: 
     def __init__(self, tck):
@@ -28,7 +31,9 @@ class Quote:
         self._close = float (close)
         self._volume = float (volume)
         self._adj_close = float (adj_close)
-        self._found = True;
+        self._diff = self._close - self._open
+        self._pct_diff = self._diff / self._open
+        self._found = True
     def date (self):
         return self._date
     def isOk (self):
@@ -42,7 +47,9 @@ class Quote:
                  self._low,
                  self._close,
                  self._volume,
-                 self._adj_close ]
+                 self._adj_close,
+                 format (self._diff, '.2f'),
+                 format (self._pct_diff * 100, '.2f') + "%" ]
 
     def __str__ (self):
         return "\t".join([str(s) for s in self.toList() ])
@@ -109,6 +116,7 @@ class QuoteGetter:
 class QuoteSet:
     def __init__ (self):
         self._quotes = []
+        self._date = None
     def readTickers (self, fh):
         for line in fh.readlines():
             q = Quote (line.strip())
@@ -117,16 +125,24 @@ class QuoteSet:
         for q in self._quotes:
             g = QuoteGetter (date, q)
             g.run()
+            if q.isOk() and not self._date:
+                self._date = q.date()
     def output (self, fh):
         for q in self._quotes:
             if q.isOk():
                 fh.write(str(q) + "\n")
                 fh.flush()
+    def date (self):
+        return self._date
 
 raw_date = sys.argv[1]
 date = parse_date (raw_date)
 qs = QuoteSet()
 qs.readTickers (sys.stdin)
 qs.fetch (date)
-qs.output (sys.stdout)
+fn = date_to_filename (qs.date())
+warn (" --> Output to file {0}".format(fn))
+fh = open(fn, "w")
+qs.output (fh)
+fh.close ()
         
