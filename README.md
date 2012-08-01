@@ -22,8 +22,8 @@ Tickers for a performance of "House/Divided"
 * Run it yourself on your Mac; make sure that Python v3 is installed and
 is in your path.
 * As I noted in email, `LEH` or Lehman Brothers is *not* available,
-since Yahoo removes quote data (or makes it inaccessible) one a stock
+since Yahoo removes quote data (or makes it inaccessible) once a stock
 is delisted.
-* To "fudge" the LEH data, see this graph: http://tinyurl.com/cmalgze
+   * To "fudge" the LEH data, see this graph: http://tinyurl.com/cmalgze
 
 
