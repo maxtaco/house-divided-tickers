@@ -4,6 +4,37 @@ house-divided-tickers
 Tickers for a performance of "House/Divided"
 
 * See the `out/` directory for the output.
+   
+    * `out/2004_10_27.txt` corresponds to:
+```
+TICKER #1
+sc 2 - broker talk / conf call - circa 2004.  90% green, 10% red
+```
+
+     * `out/2005_10_21.txt` corresponds to:
+````
+TICKER #2
+sc 4 - robocall - things are a little worse.  75% green, 25% red
+```
+     * `out/2008_08_21.txt` corresponds to:
+```    
+TICKER #3
+sc 16 - lehman conf call - 2008 - lehman on the verge of collapse. 40% green, 60% red
+```
+
+    * `out/2008_09_17.txt` corresponds to:
+```
+TICKER #4
+sc 20a - lehman collapse / set comes down - 100% red.
+```
+
+    * `out/2009_03_05.txt` corresponds to:
+```
+TICKER #5
+sc 20b - goldman call, post collapse - 5% green, 95% red.
+```
+
+ 
 * Run `all.sh` to generate output
     * `all.sh` calls `pull_date.py` for each date in question.  
        That file grabs the historical quotes from Yahoo for 
@@ -25,5 +56,4 @@ is in your path.
 since Yahoo removes quote data (or makes it inaccessible) once a stock
 is delisted.
     * To "fudge" the LEH data, see this graph: http://tinyurl.com/cmalgze
-
 
