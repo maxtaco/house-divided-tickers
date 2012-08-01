@@ -14,7 +14,7 @@ sc 2 - broker talk / conf call - circa 2004.  90% green, 10% red
 
     * `out/2005_10_21.txt` corresponds to:
 
-````
+```
 TICKER #2
 sc 4 - robocall - things are a little worse.  75% green, 25% red
 ```
