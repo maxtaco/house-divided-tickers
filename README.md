@@ -3,7 +3,7 @@ house-divided-tickers
 
 This is a small snippet of code (mainly in Python v3) to pull historical
 price data on all members of the S&P 500, so they can be played on the
-big screen in upcoming performance of House/Divided.   The data has
+big screen in upcoming performances of House/Divided.   The data has
 been pulled for five specific days (detailed below), but it's pretty
 easy to extend what's here to work for different days, or more than
 just five days. 
